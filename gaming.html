@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Gaming ideas and the KINGSTER AI custom video editor.">
+  <meta name="theme-color" content="#070d19">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Gaming | KINGSTER AI STUDIO</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="header">
+    <a class="logo" href="index.html">KINGSTER AI STUDIO</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-navigation">Menu</button>
+    <nav class="navigation" id="main-navigation" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="gaming.html">Gaming</a>
+      <a href="ai.html">AI</a>
+      <a href="creative.html">Creative</a>
+      <a href="tools.html">Tools</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main class="gaming-page">
+    <section class="gaming-intro">
+      <p class="gaming-tag">WELCOME TO THE GAMING ZONE</p>
+      <h1>LEVEL UP YOUR <span>GAMING</span></h1>
+      <p>Explore gaming ideas, discover useful tools and turn your gameplay clips into customised videos.</p>
+    </section>
+
+    <section class="gaming-grid">
+      <article class="gaming-card">
+        <div class="gaming-icon">🔥</div>
+        <h2>Free Fire</h2>
+        <p>Build highlight montages, clutch compilations and gameplay projects.</p>
+        <a href="#ai-editor" class="btn">Edit Free Fire Clips</a>
+      </article>
+      <article class="gaming-card">
+        <div class="gaming-icon">⚽</div>
+        <h2>Football & FIFA</h2>
+        <p>Bring your goals, skills and best moments together.</p>
+        <a href="#ai-editor" class="btn">Create a Football Edit</a>
+      </article>
+      <article class="gaming-card">
+        <div class="gaming-icon">💡</div>
+        <h2>Your Gaming Idea</h2>
+        <p>Describe the style you want and customise your video settings.</p>
+        <a href="#ai-editor" class="btn">Start Creating</a>
+      </article>
+    </section>
+
+    <section class="ai-editor" id="ai-editor">
+      <div class="editor-heading">
+        <p class="gaming-tag">YOUR CLIPS. YOUR RULES.</p>
+        <h2>KINGSTER <span>VIDEO STUDIO</span></h2>
+        <p>Upload clips, describe your edit and customise the result.</p>
+      </div>
+
+      <div class="editor-grid">
+        <section class="editor-panel">
+          <h3>1. Upload your clips</h3>
+          <label class="field-label" for="videoUpload">Gaming videos (you can select multiple)</label>
+          <input type="file" id="videoUpload" accept="video/*" multiple>
+          <p class="field-help">For this browser-based first version, use a few short clips (up to 500 MB each). Your files stay on your device.</p>
+          <div id="fileStatus" class="status" aria-live="polite">No videos selected yet.</div>
+          <ul id="clipList" class="clip-list"></ul>
+
+          <label class="field-label" for="musicUpload">Optional background music</label>
+          <input type="file" id="musicUpload" accept="audio/*">
+          <div id="musicStatus" class="field-help">No music selected.</div>
+        </section>
+
+        <section class="editor-panel">
+          <h3>2. Describe your edit</h3>
+          <label class="field-label" for="editDescription">What should the finished video look and feel like?</label>
+          <textarea id="editDescription" rows="4" placeholder="Example: Make a fast Free Fire montage. Put my best moments first, use blue glow text, smooth cuts and energetic music."></textarea>
+
+          <div class="form-grid">
+            <div>
+              <label class="field-label" for="editStyle">Video style</label>
+              <select id="editStyle">
+                <option value="montage">Gaming montage</option>
+                <option value="headshot">Headshot highlights</option>
+                <option value="cinematic">Cinematic edit</option>
+                <option value="funny">Funny moments</option>
+                <option value="football">Football / FIFA edit</option>
+                <option value="custom">My own style</option>
+              </select>
+            </div>
+            <div>
+              <label class="field-label" for="videoFormat">Video format</label>
+              <select id="videoFormat">
+                <option value="9:16">TikTok / Reels (9:16)</option>
+                <option value="16:9">YouTube (16:9)</option>
+                <option value="1:1">Square (1:1)</option>
+              </select>
+            </div>
+            <div>
+              <label class="field-label" for="videoLength">Maximum length</label>
+              <select id="videoLength">
+                <option value="30">30 seconds</option>
+                <option value="60" selected>1 minute</option>
+                <option value="120">2 minutes</option>
+                <option value="all">Use all selected clips</option>
+              </select>
+            </div>
+            <div>
+              <label class="field-label" for="transitions">Transitions</label>
+              <select id="transitions">
+                <option value="cut">Clean cuts</option>
+                <option value="fade">Fade between clips</option>
+              </select>
+            </div>
+          </div>
+
+          <label class="field-label" for="overlayText">Text to show on the video (optional)</label>
+          <input type="text" id="overlayText" maxlength="60" placeholder="Example: KINGSTER ON TOP">
+
+          <fieldset class="effects-options">
+            <legend>Extra effects</legend>
+            <label><input type="checkbox" value="slow" name="effects"> Slow-motion feel</label>
+            <label><input type="checkbox" value="glow" name="effects"> Glow-style colour</label>
+            <label><input type="checkbox" value="mono" name="effects"> Black & white</label>
+          </fieldset>
+        </section>
+      </div>
+
+      <div class="editor-actions">
+        <button type="button" id="generateBtn" class="btn">GENERATE MY VIDEO</button>
+        <button type="button" id="stopBtn" class="btn btn-secondary" disabled>Stop generation</button>
+          <p id="generationStatus" class="status" aria-live="polite" role="status">Choose your clips and settings to begin.</p>
+      </div>
+
+      <section class="preview-panel">
+        <h3>3. Preview & download</h3>
+        <video id="videoPreview" controls playsinline></video>
+        <a id="downloadLink" class="btn download-btn" hidden>Download finished video</a>
+      <p class="field-help">This generator exports a WebM video in your browser. Your edit description is a creative note and does not control the export yet. This is a basic montage maker, not an AI system that understands gameplay or detects headshots automatically.</p>
+      </section>
+    </section>
+
+    <section class="gaming-callout">
+      <h2>YOUR GAMEPLAY. YOUR CREATION.</h2>
+      <p>We're building more editing tools and smarter automation as KINGSTER AI STUDIO grows.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 KINGSTER AI STUDIO. All rights reserved.</p>
+    <p>BUILD. PLAY. CREATE.</p>
+  </footer>
+</body>
+</html>
