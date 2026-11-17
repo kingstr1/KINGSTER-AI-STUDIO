@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Play Neon Reflex, a quick arcade game from KINGSTER AI STUDIO.">
+  <meta name="theme-color" content="#070d19">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Arcade | KINGSTER AI STUDIO</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <script src="arcade.js" defer></script>
+</head>
+<body>
+  <header class="header">
+    <a class="logo" href="index.html">KINGSTER AI STUDIO</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-navigation">Menu</button>
+    <nav class="navigation" id="main-navigation" aria-label="Main navigation">
+      <a href="index.html">Home</a><a href="gaming.html">Gaming</a><a href="arcade.html">Arcade</a>
+      <a href="ai.html">AI</a><a href="creative.html">Creative</a><a href="tools.html">Tools</a><a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main class="arcade-page">
+    <section class="arcade-intro">
+      <p class="gaming-tag">QUICK BREAK · NO DOWNLOAD NEEDED</p>
+      <h1>NEON <span>REFLEX</span></h1>
+      <p>Catch the cyan orb, dodge the red decoys, and see how many points you can score in 30 seconds.</p>
+    </section>
+
+    <section class="arcade-card" aria-labelledby="game-title">
+      <div class="arcade-scoreboard" aria-label="Game scores">
+        <div><span class="score-label">SCORE</span><strong id="scoreValue">0</strong></div>
+        <div><span class="score-label">TIME</span><strong><span id="timeValue">30</span><span class="score-unit">s</span></strong></div>
+        <div><span class="score-label">BEST HERE</span><strong id="bestValue">0</strong></div>
+      </div>
+
+      <h2 id="game-title" class="visually-hidden">Neon Reflex game board</h2>
+      <p class="arcade-instructions">Tap or click the <span class="orb-key">cyan orb</span>. Avoid the <span class="decoy-key">red decoy</span> — it costs a point.</p>
+      <div class="arcade-board" id="gameBoard" role="group" aria-label="Nine game tiles">
+        <button class="arcade-tile" type="button" aria-label="Tile 1" disabled></button>
+        <button class="arcade-tile" type="button" aria-label="Tile 2" disabled></button>
+        <button class="arcade-tile" type="button" aria-label="Tile 3" disabled></button>
+        <button class="arcade-tile" type="button" aria-label="Tile 4" disabled></button>
+        <button class="arcade-tile" type="button" aria-label="Tile 5" disabled></button>
+        <button class="arcade-tile" type="button" aria-label="Tile 6" disabled></button>
+        <button class="arcade-tile" type="button" aria-label="Tile 7" disabled></button>
+        <button class="arcade-tile" type="button" aria-label="Tile 8" disabled></button>
+        <button class="arcade-tile" type="button" aria-label="Tile 9" disabled></button>
+      </div>
+
+      <p id="gameStatus" class="arcade-status" role="status" aria-live="polite">Ready when you are. You have 30 seconds.</p>
+      <button id="startGame" class="btn arcade-start" type="button">START GAME</button>
+      <p class="arcade-note">Your best score is saved only in this browser. Have fun!</p>
+    </section>
+  </main>
+
+  <footer class="footer"><p>© 2026 KINGSTER AI STUDIO. All rights reserved.</p><p>BUILD. PLAY. CREATE.</p></footer>
+</body>
+</html>

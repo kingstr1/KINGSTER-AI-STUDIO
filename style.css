@@ -43,6 +43,31 @@ button, input, select, textarea { font: inherit; }
 .content-card { padding: 22px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); }
 .content-card h2 { margin-top: 0; }
 .content-card p { margin-bottom: 0; }
+.arcade-page { width: min(920px, 94%); margin: 0 auto; padding: clamp(38px,7vw,76px) 0; }
+.arcade-intro { text-align: center; margin-bottom: 28px; }
+.arcade-intro h1 { font-size: clamp(2.7rem,8vw,5rem); line-height: 1.05; margin: 10px 0; font-weight: 900; }
+.arcade-intro h1 span { color: var(--cyan); }
+.arcade-intro > p:last-child { color: var(--muted); max-width: 620px; margin: 0 auto; }
+.arcade-card { max-width: 580px; margin: 0 auto; padding: clamp(18px,4vw,30px); text-align: center; border: 1px solid var(--border); border-radius: 20px; background: radial-gradient(ellipse at 50% 0,rgba(53,221,255,.1),transparent 55%),var(--surface); box-shadow: 0 16px 60px rgba(0,0,0,.24); }
+.arcade-scoreboard { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 20px; }
+.arcade-scoreboard > div { display: flex; flex-direction: column; padding: 10px; border: 1px solid var(--border); border-radius: 10px; background: rgba(7,13,25,.55); }
+.score-label { color: var(--muted); font-size: 11px; letter-spacing: 1.5px; font-weight: bold; }
+.arcade-scoreboard strong { font-size: clamp(1.5rem,5vw,2.2rem); color: var(--white); line-height: 1.25; }
+.score-unit { color: var(--muted); font-size: .8rem; margin-left: 3px; }
+.arcade-instructions { margin: 10px 0 18px; color: var(--muted); }
+.orb-key { color: var(--cyan); font-weight: 800; }
+.decoy-key { color: #ff7591; font-weight: 800; }
+.arcade-board { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: clamp(8px,2vw,14px); max-width: 430px; margin: 0 auto; }
+.arcade-tile { aspect-ratio: 1; min-width: 0; border: 1px solid rgba(53,221,255,.2); border-radius: 14px; color: var(--white); background: #0a1426; font-size: clamp(2rem,9vw,3.5rem); font-weight: 900; cursor: pointer; transition: transform .12s ease,border-color .12s ease,background .12s ease,box-shadow .12s ease; touch-action: manipulation; }
+.arcade-tile:enabled:hover { transform: scale(1.03); border-color: var(--cyan); }
+.arcade-tile:disabled { cursor: default; opacity: .7; }
+.arcade-tile.is-orb { color: #06121c; border-color: var(--cyan); background: radial-gradient(circle at 35% 30%,#d8fbff,#35ddff 50%,#178ab8); box-shadow: 0 0 28px rgba(53,221,255,.55),inset 0 0 14px rgba(255,255,255,.45); animation: orb-pulse .7s ease-in-out infinite alternate; }
+.arcade-tile.is-decoy { color: #fff; border-color: #ff7591; background: radial-gradient(circle,#fa5978,#9e234b); box-shadow: 0 0 20px rgba(255,60,110,.38); }
+.arcade-status { min-height: 3em; margin: 12px auto 0; color: var(--cyan); font-weight: bold; }
+.arcade-start { min-width: 180px; }
+.arcade-note { margin-top: 12px; color: var(--muted); font-size: 12px; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+@keyframes orb-pulse { from { transform: scale(.96); } to { transform: scale(1); } }
 .hero {
   min-height: 490px; display: flex; justify-content: center; align-items: center;
   text-align: center; padding: 70px 20px;
@@ -140,6 +165,7 @@ input:focus, select:focus, textarea:focus { outline: 2px solid rgba(53,221,255,.
   .navigation a { font-size: 12px; }
   .editor-grid { grid-template-columns: 1fr; }
   .gaming-page { padding: 35px 12px; }
+  .arcade-page { width: 94%; padding: 35px 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
