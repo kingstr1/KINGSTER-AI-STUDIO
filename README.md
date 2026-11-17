@@ -6,6 +6,7 @@ A small, static website for gaming, creative ideas and a browser-based gameplay 
 
 - Home, Gaming, Arcade, AI, Creative, Tools, Help and About pages
 - Responsive navigation with keyboard focus support
+- Midnight aurora visual theme across the studio
 - Homepage quick start and Help & FAQ for the editor
 - Search engine sitemap and robots file
 - Neon Reflex: a 30-second, touch-friendly mini game with a locally saved high score
