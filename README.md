@@ -4,8 +4,10 @@ A small, static website for gaming, creative ideas and a browser-based gameplay 
 
 ## Features
 
-- Home, Gaming, Arcade, AI, Creative, Tools and About pages
+- Home, Gaming, Arcade, AI, Creative, Tools, Help and About pages
 - Responsive navigation with keyboard focus support
+- Homepage quick start and Help & FAQ for the editor
+- Search engine sitemap and robots file
 - Neon Reflex: a 30-second, touch-friendly mini game with a locally saved high score
 - Local video montage export to WebM in supported browsers
 - Portrait, landscape and square formats; duration limit; optional music and overlay text
@@ -35,7 +37,9 @@ The site is static and does not need a server, API key or build command. Do not 
 - `index.html` — home page
 - `gaming.html` — gaming page and video editor
 - `arcade.html`, `arcade.js` — Neon Reflex mini game
+- `help.html` — video editor and Arcade help
 - `ai.html`, `creative.html`, `tools.html`, `about.html` — studio information pages
 - `style.css`, `script.js` — shared styling and browser interactions
 - `404.html` — GitHub Pages not-found page
 - `favicon.svg` — site icon
+- `sitemap.xml`, `robots.txt` — search indexing guidance

@@ -14,6 +14,7 @@
   <script src="script.js" defer></script>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="header">
     <a class="logo" href="index.html">KINGSTER AI STUDIO</a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-navigation">Menu</button>
@@ -24,18 +25,19 @@
       <a href="ai.html">AI</a>
       <a href="creative.html">Creative</a>
       <a href="tools.html">Tools</a>
+      <a href="help.html">Help</a>
       <a href="about.html">About</a>
     </nav>
   </header>
 
-  <main>
+  <main id="main-content" tabindex="-1">
     <section class="hero">
       <div class="hero-content">
         <p class="hero-tag">WELCOME TO THE FUTURE</p>
         <h1>BUILD. PLAY. <span>CREATE.</span></h1>
-        <p>Welcome to KINGSTER AI STUDIO — a place where gaming, artificial intelligence and creativity come together.</p>
-        <a href="gaming.html" class="btn">Explore Studio</a>
-        <a href="gaming.html#ai-editor" class="btn btn-secondary">Create a Gaming Video</a>
+        <p>Explore gaming, creative ideas and simple browser tools. Make a gameplay montage, then take a quick break in the Arcade.</p>
+        <a href="gaming.html#ai-editor" class="btn">Open the Video Editor</a>
+        <a href="arcade.html" class="btn btn-secondary">Play Neon Reflex</a>
       </div>
     </section>
 
@@ -72,9 +74,32 @@
       </div>
     </section>
 
-    <section class="games-section">
-      <h2>Our Vision</h2>
-      <p>We are building something exciting. Learn, experiment and create with KINGSTER AI STUDIO.</p>
+    <section class="quick-start" aria-labelledby="quick-start-title">
+      <div class="section-heading">
+        <p>START HERE</p>
+        <h2 id="quick-start-title">Make something in a few steps</h2>
+      </div>
+      <div class="quick-start-grid">
+        <article class="quick-start-card">
+          <span class="step-number">01</span>
+          <h3>Create a montage</h3>
+          <p>Choose short gameplay clips, pick a format and download your WebM video.</p>
+          <a href="gaming.html#ai-editor">Open the editor →</a>
+        </article>
+        <article class="quick-start-card">
+          <span class="step-number">02</span>
+          <h3>Try the Arcade</h3>
+          <p>Play a quick 30-second reflex game. Your best score stays in this browser.</p>
+          <a href="arcade.html">Play Neon Reflex →</a>
+        </article>
+        <article class="quick-start-card">
+          <span class="step-number">03</span>
+          <h3>Get help</h3>
+          <p>See how the editor works, what it supports and what to try if an export fails.</p>
+          <a href="help.html">Visit Help & FAQ →</a>
+        </article>
+      </div>
+      <p class="privacy-note">Your selected video and audio files are processed in your browser and are not uploaded by this site.</p>
     </section>
   </main>
 

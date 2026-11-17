@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kingstr1.github.io/KINGSTER-AI-STUDIO/sitemap.xml

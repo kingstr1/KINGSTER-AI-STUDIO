@@ -22,6 +22,13 @@ document.addEventListener("DOMContentLoaded", () => {
         navigation.classList.remove("is-open");
       }
     });
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && menuToggle.getAttribute("aria-expanded") === "true") {
+        menuToggle.setAttribute("aria-expanded", "false");
+        navigation.classList.remove("is-open");
+        menuToggle.focus();
+      }
+    });
   }
 
   const upload = document.getElementById("videoUpload");
