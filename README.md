@@ -11,6 +11,7 @@ A small, static website for gaming, creative ideas and a browser-based gameplay 
 - Search engine sitemap and robots file
 - Neon Reflex: a 30-second, touch-friendly mini game with a locally saved high score
 - Local video montage export to WebM in supported browsers
+- 30 selectable editing tools for motion, color, framing and titles
 - Portrait, landscape and square formats; duration limit; optional music and overlay text
 - Basic cuts, fade-style transitions, slow playback, grayscale and colour effects
 

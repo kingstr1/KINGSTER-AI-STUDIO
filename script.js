@@ -43,6 +43,39 @@ document.addEventListener("DOMContentLoaded", () => {
   const status = document.getElementById("generationStatus");
   const preview = document.getElementById("videoPreview");
   const downloadLink = document.getElementById("downloadLink");
+  const toolInputs = Array.from(document.querySelectorAll('input[name="effects"]'));
+  const toolSelectionStatus = document.getElementById("toolSelectionStatus");
+  const clearToolsBtn = document.getElementById("clearToolsBtn");
+  const savedToolsKey = "kingster-video-tools-v1";
+
+  try {
+    const savedTools = JSON.parse(localStorage.getItem(savedToolsKey) || "[]");
+    toolInputs.forEach(input => { input.checked = savedTools.includes(input.value); });
+  } catch {
+    // Tool choices still work when browser storage is unavailable.
+  }
+
+  function updateToolSelection() {
+    const selectedTools = toolInputs.filter(input => input.checked).map(input => input.value);
+    if (toolSelectionStatus) {
+      toolSelectionStatus.textContent = `${selectedTools.length} of 30 tools selected. Saved in this browser.`;
+    }
+    if (clearToolsBtn) clearToolsBtn.disabled = selectedTools.length === 0;
+    try {
+      localStorage.setItem(savedToolsKey, JSON.stringify(selectedTools));
+    } catch {
+      // Keep the current selection for this visit if browser storage is unavailable.
+    }
+  }
+
+  toolInputs.forEach(input => input.addEventListener("change", updateToolSelection));
+  if (clearToolsBtn) {
+    clearToolsBtn.addEventListener("click", () => {
+      toolInputs.forEach(input => { input.checked = false; });
+      updateToolSelection();
+    });
+  }
+  updateToolSelection();
 
   let clips = [];
   let musicFile = null;
@@ -110,27 +143,111 @@ document.addEventListener("DOMContentLoaded", () => {
     const scale = Math.max(width / vw, height / vh);
     const sw = width / scale, sh = height / scale;
     const sx = (vw - sw) / 2, sy = (vh - sh) / 2;
+    const tools = settings.effects;
+    const filters = [];
+    if (tools.includes("mono")) filters.push("grayscale(1)");
+    if (tools.includes("glow")) filters.push("saturate(1.5) contrast(1.08)");
+    if (tools.includes("sepia")) filters.push("sepia(.82)");
+    if (tools.includes("negative")) filters.push("invert(1)");
+    if (tools.includes("brighten")) filters.push("brightness(1.2)");
+    if (tools.includes("darken")) filters.push("brightness(.8)");
+    if (tools.includes("contrast")) filters.push("contrast(1.3)");
+    if (tools.includes("soft-contrast")) filters.push("contrast(.82) brightness(1.04)");
+    if (tools.includes("vivid")) filters.push("saturate(1.45)");
+    if (tools.includes("muted")) filters.push("saturate(.68)");
+    if (tools.includes("warm")) filters.push("sepia(.22) saturate(1.12)");
+    if (tools.includes("cool")) filters.push("hue-rotate(14deg) saturate(1.08)");
+    if (tools.includes("blur")) filters.push("blur(1.5px)");
+
     ctx.save();
-    if (settings.effects.includes("mono")) ctx.filter = "grayscale(1)";
-    else if (settings.effects.includes("glow")) ctx.filter = "saturate(1.5) contrast(1.08)";
-    else ctx.filter = "none";
-    ctx.drawImage(video, sx, sy, sw, sh, 0, 0, width, height);
+    ctx.translate(width / 2, height / 2);
+    if (tools.includes("rotate")) ctx.rotate(Math.PI);
+    const zoom = tools.includes("zoom") ? 1.08 : 1;
+    const horizontal = tools.includes("mirror") ? -1 : 1;
+    const vertical = tools.includes("flip") ? -1 : 1;
+    ctx.scale(horizontal * zoom, vertical * zoom);
+    ctx.filter = filters.join(" ") || "none";
+    ctx.drawImage(video, sx, sy, sw, sh, -width / 2, -height / 2, width, height);
     ctx.restore();
 
-    if (settings.effects.includes("glow")) {
+    if (tools.includes("glow")) {
       ctx.fillStyle = "rgba(0,190,255,0.08)";
       ctx.fillRect(0, 0, width, height);
     }
+    if (tools.includes("warm")) {
+      ctx.fillStyle = "rgba(255,150,72,.08)";
+      ctx.fillRect(0, 0, width, height);
+    }
+    if (tools.includes("cool")) {
+      ctx.fillStyle = "rgba(72,176,255,.09)";
+      ctx.fillRect(0, 0, width, height);
+    }
+    if (tools.includes("purple")) {
+      ctx.fillStyle = "rgba(151,94,255,.14)";
+      ctx.fillRect(0, 0, width, height);
+    }
+    if (tools.includes("softlight")) {
+      const softLight = ctx.createRadialGradient(width / 2, height / 2, 0, width / 2, height / 2, Math.max(width, height) * .72);
+      softLight.addColorStop(0, "rgba(255,255,255,.13)");
+      softLight.addColorStop(1, "rgba(119,211,255,.02)");
+      ctx.fillStyle = softLight;
+      ctx.fillRect(0, 0, width, height);
+    }
+    if (tools.includes("fade-wash")) {
+      ctx.fillStyle = "rgba(255,255,255,.13)";
+      ctx.fillRect(0, 0, width, height);
+    }
+    if (tools.includes("vignette")) {
+      const vignette = ctx.createRadialGradient(width / 2, height / 2, Math.min(width, height) * .18, width / 2, height / 2, Math.max(width, height) * .72);
+      vignette.addColorStop(0, "rgba(0,0,0,0)");
+      vignette.addColorStop(1, "rgba(0,0,0,.52)");
+      ctx.fillStyle = vignette;
+      ctx.fillRect(0, 0, width, height);
+    }
+    if (tools.includes("grain")) {
+      for (let i = 0; i < 120; i++) {
+        ctx.fillStyle = Math.random() > .5 ? "rgba(255,255,255,.22)" : "rgba(0,0,0,.22)";
+        ctx.fillRect(Math.random() * width, Math.random() * height, 2, 2);
+      }
+    }
+    if (tools.includes("bars")) {
+      const barHeight = Math.round(height * .085);
+      ctx.fillStyle = "#05060b";
+      ctx.fillRect(0, 0, width, barHeight);
+      ctx.fillRect(0, height - barHeight, width, barHeight);
+    }
+    if (tools.includes("frame")) {
+      ctx.save();
+      ctx.lineWidth = Math.max(8, Math.round(width * .012));
+      ctx.strokeStyle = "rgba(245,244,255,.82)";
+      ctx.strokeRect(ctx.lineWidth, ctx.lineWidth, width - ctx.lineWidth * 2, height - ctx.lineWidth * 2);
+      ctx.restore();
+    }
+
     const title = settings.overlay || label;
     if (title) {
-      const fontSize = Math.max(24, Math.round(width * 0.045));
+      const baseFontSize = Math.max(24, Math.round(width * 0.045));
+      const fontSize = tools.includes("large-title") ? Math.round(baseFontSize * 1.3) : baseFontSize;
+      const titleY = tools.includes("lower-third") ? height * .85 : height * .13;
       ctx.font = `900 ${fontSize}px Arial`;
       ctx.textAlign = "center";
+      const titleWidth = Math.min(ctx.measureText(title).width, width * .88);
+      if (tools.includes("text-panel")) {
+        const paddingX = fontSize * .38;
+        const paddingY = fontSize * .24;
+        ctx.fillStyle = "rgba(7,10,19,.76)";
+        ctx.fillRect(width / 2 - titleWidth / 2 - paddingX, titleY - fontSize - paddingY, titleWidth + paddingX * 2, fontSize + paddingY * 2);
+      }
       ctx.lineWidth = Math.max(3, fontSize / 8);
       ctx.strokeStyle = "rgba(0,0,0,.8)";
       ctx.fillStyle = "#ffffff";
-      ctx.strokeText(title, width / 2, height * 0.13, width * 0.88);
-      ctx.fillText(title, width / 2, height * 0.13, width * 0.88);
+      if (tools.includes("text-shadow")) {
+        ctx.shadowColor = "rgba(104,240,214,.8)";
+        ctx.shadowBlur = fontSize * .42;
+      }
+      ctx.strokeText(title, width / 2, titleY, width * .88);
+      ctx.fillText(title, width / 2, titleY, width * .88);
+      ctx.shadowBlur = 0;
     }
   }
 
@@ -211,7 +328,7 @@ document.addEventListener("DOMContentLoaded", () => {
         await video.play();
         const startedAt = performance.now();
         let lastDraw = 0;
-        video.playbackRate = effects.includes("slow") ? 0.75 : 1;
+        video.playbackRate = effects.includes("slow") ? 0.65 : effects.includes("fast") ? 1.25 : 1;
         while (!video.ended && !stopRequested && video.currentTime < playFor) {
           const now = performance.now();
           if (now - lastDraw >= 30) {

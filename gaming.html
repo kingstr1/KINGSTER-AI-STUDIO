@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Gaming ideas and the KINGSTER AI custom video editor.">
+  <meta name="description" content="Edit gameplay clips in the browser with 30 selectable tools for color, motion, framing and titles.">
   <meta name="theme-color" content="#090b17">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <title>Gaming | KINGSTER AI STUDIO</title>
@@ -122,14 +122,72 @@
           <label class="field-label" for="overlayText">Text to show on the video (optional)</label>
           <input type="text" id="overlayText" maxlength="60" placeholder="Example: KINGSTER ON TOP">
 
-          <fieldset class="effects-options">
-            <legend>Extra effects</legend>
-            <label><input type="checkbox" value="slow" name="effects"> Slow-motion feel</label>
-            <label><input type="checkbox" value="glow" name="effects"> Glow-style colour</label>
-            <label><input type="checkbox" value="mono" name="effects"> Black & white</label>
-          </fieldset>
         </section>
       </div>
+
+      <section class="toolbox" id="editing-tools" aria-labelledby="editing-tools-title">
+        <div class="toolbox-heading">
+          <div>
+            <h3 id="editing-tools-title">3. Choose your own editing tools</h3>
+            <p>Pick any combination of 30 tools and make the edit feel like yours.</p>
+          </div>
+          <div class="toolbox-actions">
+            <p class="tool-selection-count" id="toolSelectionStatus" role="status" aria-live="polite">0 of 30 tools selected.</p>
+            <button type="button" class="btn btn-secondary clear-tools" id="clearToolsBtn" disabled>Clear selections</button>
+          </div>
+        </div>
+
+        <div class="toolbox-grid">
+          <fieldset class="effects-options">
+            <legend>Motion & framing · 6 tools</legend>
+            <div class="tool-list">
+              <label><input type="checkbox" value="slow" name="effects"> Slow motion</label>
+              <label><input type="checkbox" value="fast" name="effects"> Fast motion</label>
+              <label><input type="checkbox" value="mirror" name="effects"> Mirror left to right</label>
+              <label><input type="checkbox" value="flip" name="effects"> Flip upside down</label>
+              <label><input type="checkbox" value="zoom" name="effects"> Gentle zoom</label>
+              <label><input type="checkbox" value="rotate" name="effects"> Rotate 180°</label>
+            </div>
+          </fieldset>
+
+          <fieldset class="effects-options">
+            <legend>Color & light · 14 tools</legend>
+            <div class="tool-list">
+              <label><input type="checkbox" value="mono" name="effects"> Black & white</label>
+              <label><input type="checkbox" value="glow" name="effects"> Neon glow</label>
+              <label><input type="checkbox" value="sepia" name="effects"> Vintage sepia</label>
+              <label><input type="checkbox" value="negative" name="effects"> Negative colors</label>
+              <label><input type="checkbox" value="brighten" name="effects"> Brighten</label>
+              <label><input type="checkbox" value="darken" name="effects"> Darken</label>
+              <label><input type="checkbox" value="contrast" name="effects"> High contrast</label>
+              <label><input type="checkbox" value="soft-contrast" name="effects"> Soft contrast</label>
+              <label><input type="checkbox" value="vivid" name="effects"> Vivid colors</label>
+              <label><input type="checkbox" value="muted" name="effects"> Muted colors</label>
+              <label><input type="checkbox" value="warm" name="effects"> Warm tone</label>
+              <label><input type="checkbox" value="cool" name="effects"> Cool tone</label>
+              <label><input type="checkbox" value="purple" name="effects"> Purple tint</label>
+              <label><input type="checkbox" value="blur" name="effects"> Soft blur</label>
+            </div>
+          </fieldset>
+
+          <fieldset class="effects-options">
+            <legend>Finishing & titles · 10 tools</legend>
+            <div class="tool-list">
+              <label><input type="checkbox" value="vignette" name="effects"> Vignette</label>
+              <label><input type="checkbox" value="bars" name="effects"> Cinema bars</label>
+              <label><input type="checkbox" value="grain" name="effects"> Film grain</label>
+              <label><input type="checkbox" value="softlight" name="effects"> Soft-light glow</label>
+              <label><input type="checkbox" value="frame" name="effects"> Frame border</label>
+              <label><input type="checkbox" value="lower-third" name="effects"> Lower-third title</label>
+              <label><input type="checkbox" value="large-title" name="effects"> Large title</label>
+              <label><input type="checkbox" value="text-panel" name="effects"> Title background panel</label>
+              <label><input type="checkbox" value="text-shadow" name="effects"> Title shadow</label>
+              <label><input type="checkbox" value="fade-wash" name="effects"> Soft fade wash</label>
+            </div>
+          </fieldset>
+        </div>
+        <p class="field-help toolbox-note">Your selection is saved in this browser. If both speed tools are selected, slow motion takes priority.</p>
+      </section>
 
       <div class="editor-actions">
         <button type="button" id="generateBtn" class="btn">GENERATE MY VIDEO</button>
@@ -138,7 +196,7 @@
       </div>
 
       <section class="preview-panel">
-        <h3>3. Preview & download</h3>
+        <h3>4. Preview & download</h3>
         <video id="videoPreview" controls playsinline></video>
         <a id="downloadLink" class="btn download-btn" hidden>Download finished video</a>
       <p class="field-help">This generator exports a WebM video in your browser. Your edit description is a creative note and does not control the export yet. This is a basic montage maker, not an AI system that understands gameplay or detects headshots automatically.</p>
